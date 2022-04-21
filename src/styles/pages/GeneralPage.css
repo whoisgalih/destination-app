@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Joyride-Round';
+  src: url('../../fonts/Joyride-Round.otf') format('opentype');
+}
+
+.center-title {
+  text-align: center;
+  margin: 135px auto 110px auto;
+  max-width: 550px;
+}
+
+.center-title > .section-red {
+  font-family: 'Joyride-Round';
+  text-transform: lowercase;
+  margin-bottom: 16px;
+}
+
+.center-title > .big-title {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 3rem;
+  margin-bottom: 24px;
+}
