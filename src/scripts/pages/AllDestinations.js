@@ -3,9 +3,10 @@ import PageTitle from '../components/PageTitle';
 import DataSource from '../data/DataSource';
 import Masonry from 'react-masonry-css';
 
-import '../../styles/pages/Destinations.css';
+import '../../styles/pages/AllDestinations.css';
+import DestinationItem from '../components/DestinationItem';
 
-class Destinations extends Component {
+class AllDestinations extends Component {
   constructor(props) {
     super(props);
     this.sizer = createRef();
@@ -13,7 +14,7 @@ class Destinations extends Component {
     this.state = {
       destinations: [],
       success: null,
-      imageWidth: 0,
+      width: 0,
     };
   }
 
@@ -34,31 +35,28 @@ class Destinations extends Component {
   }
 
   destinationsJSX() {
-    let jsx = this.state.destinations.map((destination) => (
-      <div className='destination-item' key={destination.id}>
-        <div className='header'>
-          <div className='image'>
-            <img src={destination.image} alt={destination.name} style={{ height: this.state.imageWidth }} />
-          </div>
-          <div className='bottom-right'>Halllllo</div>
-        </div>
-        <div className='body'>
-          <div className='title fs-4'>{destination.name}</div>
-          <div className='description'>{destination.description}</div>
-        </div>
-      </div>
-    ));
+    let jsx = this.state.destinations.map((destination) =>
+      // prettier-ignore
+      <DestinationItem 
+        key={destination.id}
+        id={destination.id} 
+        name={destination.name} 
+        description={destination.description} 
+        image={destination.image}
+      />
+    );
 
-    jsx.splice(0, 0, <div ref={this.sizer} style={{ height: '200px' }}></div>);
-    jsx.splice(2, 0, <div style={{ height: '100px' }}></div>);
+    jsx.splice(0, 0, <div ref={this.sizer} className='white-space-1'></div>);
+    jsx.splice(2, 0, <div className='white-space-2'></div>);
 
     return jsx;
   }
 
   updateDimension() {
     this.setState({
-      imageWidth: this.sizer.current.offsetWidth,
+      width: this.sizer.current.offsetWidth,
     });
+    console.log(this.state.width);
   }
 
   componentDidMount() {
@@ -71,6 +69,12 @@ class Destinations extends Component {
     this.updateDimension();
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', () => {
+      this.updateDimension();
+    });
+  }
+
   render() {
     return (
       <div className='container-xxl custom-padding'>
@@ -80,12 +84,25 @@ class Destinations extends Component {
           title='Places To Explore' 
           subtitle={`"One day, you'll leave this world behind. So live a life you will remember" ━ Avicii`} 
         />
-        <Masonry breakpointCols={3} className='destination-list' columnClassName='destination-list-item'>
+        <Masonry
+          breakpointCols={{
+            default: 3,
+            992: 2,
+            576: 1,
+          }}
+          className='destination-list'
+          columnClassName='destination-list-item'
+        >
           {this.destinationsJSX()}
         </Masonry>
+        <style>{`
+          .destination-item > .header > .image {
+            height: ${this.state.width}px;
+          }
+        `}</style>
       </div>
     );
   }
 }
 
-export default Destinations;
+export default AllDestinations;

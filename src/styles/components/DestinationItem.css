@@ -1,0 +1,46 @@
+.destination-item > .header > .image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.destination-item > .body {
+  padding: 20px;
+}
+
+.destination-item > .body > .title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.destination-item > .body > .description {
+  font-weight: 400;
+  color: #9b9b9b;
+}
+
+.destination-item > .header {
+  position: relative;
+}
+
+.destination-item > .header > .botton-right {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  padding: 3px 10px;
+  bottom: 16px;
+  right: 16px;
+  color: #2e2e2e;
+}
+
+.destination-item > .header > .botton-right > .button-text {
+  margin-right: 5px;
+}
+
+.destination-item {
+  text-decoration: none;
+}

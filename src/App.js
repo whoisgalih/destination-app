@@ -7,7 +7,8 @@ import './App.css';
 
 // Page
 import Home from './scripts/pages/Home';
-import Destinations from './scripts/pages/Destinations';
+import Destination from './scripts/pages/Destination';
+import AllDestinations from './scripts/pages/AllDestinations';
 import AboutUs from './scripts/pages/AboutUs';
 
 export class App extends Component {
@@ -17,7 +18,8 @@ export class App extends Component {
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/destinations' element={<Destinations />} />
+          <Route path='/destinations/:id' element={<Destination />} />
+          <Route path='/destinations' element={<AllDestinations />} />
           <Route path='/destination/add' element={<Home />} />
           <Route path='/about-us' element={<AboutUs />} />
         </Routes>
