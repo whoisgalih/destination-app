@@ -6,7 +6,7 @@
 .center-title {
   text-align: center;
   margin: 135px auto 110px auto;
-  max-width: 550px;
+  max-width: 570px;
 }
 
 .center-title > .section-red {
@@ -20,4 +20,9 @@
   font-weight: 900;
   font-size: 3rem;
   margin-bottom: 24px;
+}
+
+.center-title > .subtitle {
+  font-family: 'Inter';
+  /* fooont */
 }

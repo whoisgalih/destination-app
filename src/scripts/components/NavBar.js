@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/components/NavBar.css';
+import '../../styles/components/NavBar.css';
 
 class NavBar extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class NavBar extends Component {
             Destination App
           </Link>
           <div ref={this.menu} className='nav-menu'>
-            <Link className='menu-item' to='/' onClick={(e) => this.changeActive(e)}>
+            <Link className='menu-item ' to='/' onClick={(e) => this.changeActive(e)}>
               Home
             </Link>
             <Link className='menu-item' to='/destinations' onClick={(e) => this.changeActive(e)}>

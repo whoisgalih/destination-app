@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import PageTitle from '../components/PageTitle';
 
 class AboutUs extends Component {
   render() {
     return (
       <div className='container-xxl custom-padding'>
-        <div className='center-title'>
-          <div className='section-red'></div>
-          <div className='big-title'></div>
-          <div className='subtitle'></div>
-        </div>
+        {/* prettier-ignore */}
+        <PageTitle 
+          sectionName='About us' 
+          title='Know more about us'
+        />
         <div>AboutUs</div>
       </div>
     );

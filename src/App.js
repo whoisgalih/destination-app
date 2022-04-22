@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
+import NavBar from './scripts/components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 
 // css
 import './App.css';
 
 // Page
-import Home from './pages/Home';
-import Destinations from './pages/Destinations';
-import AboutUs from './pages/AboutUs';
+import Home from './scripts/pages/Home';
+import Destinations from './scripts/pages/Destinations';
+import AboutUs from './scripts/pages/AboutUs';
 
 export class App extends Component {
   render() {
