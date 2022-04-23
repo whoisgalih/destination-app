@@ -19,7 +19,7 @@ PageTitle.propTypes = {
   sectionName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  chjildren: PropTypes.element,
+  children: PropTypes.element,
 };
 
 export default PageTitle;

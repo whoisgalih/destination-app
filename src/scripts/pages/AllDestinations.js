@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
 import DataSource from '../data/DataSource';
 import Masonry from 'react-masonry-css';
+import { Link } from 'react-router-dom';
 
 import '../../styles/pages/AllDestinations.css';
 import DestinationItem from '../components/DestinationItem';
@@ -83,7 +84,31 @@ class AllDestinations extends Component {
           sectionName='Destination' 
           title='Places To Explore' 
           subtitle={`"One day, you'll leave this world behind. So live a life you will remember" ━ Avicii`} 
-        />
+        >
+          <div className="button-area">
+            <Link className="add-destination-button" to='/destinations/add'>
+              <div className="text-primary">
+                Add Destination
+              </div>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="icon icon-tabler icon-tabler-plus" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                strokeWidth="2" 
+                stroke="#E72E38" 
+                fill="none" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </Link>
+          </div>
+        </PageTitle>
         <Masonry
           breakpointCols={{
             default: 3,

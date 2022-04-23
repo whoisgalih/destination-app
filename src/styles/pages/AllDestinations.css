@@ -26,6 +26,31 @@
   height: 100px;
 }
 
+.button-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.button-area > .add-destination-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14.5px 25px;
+  background: #ffeded;
+  border-radius: 44px;
+  text-decoration: none;
+}
+
+.button-area > .add-destination-button > div {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-right: 18px;
+}
+
 @media screen and (max-width: 992px) {
   .white-space-1 {
     height: 0px;

@@ -33,11 +33,15 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    let path = window.location.pathname.replace('/', '');
+    let path = window.location.pathname + '/';
 
-    if (path === '') {
-      path = 'home';
+    if (path === '//') {
+      path = '/home/';
     }
+
+    console.log(path);
+    path = path.substring(path.indexOf('/') + 1, path.indexOf('/', 1));
+    console.log(path);
 
     const menu = this.menu.current;
     const children = menu.children;

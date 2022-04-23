@@ -2,6 +2,7 @@ class DataSource {
   static fetchJSON(url) {
     return fetch(url)
       .then((response) => {
+        console.log(response.status);
         return response.json();
       })
       .then((responseJson) => {
