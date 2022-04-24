@@ -16,8 +16,8 @@ class AddDestination extends Component {
   async postData() {
     const state = this.state;
 
-    if (state['destination-name'] && state.location && state.website && state.instagram && state.description) {
-      const response = fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
+    if (state['destination-name'] && state.location && state.description) {
+      const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
@@ -31,8 +31,17 @@ class AddDestination extends Component {
         }),
       });
 
-      console.log(response.status);
+      return response;
     }
+
+    return null;
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const response = await this.postData();
+    console.log(response.status);
+    console.log(response.json());
   }
 
   handleInputChange(event) {
@@ -93,7 +102,7 @@ class AddDestination extends Component {
           sectionName='add destination' 
           title='Add a Destination' 
         />
-        <form>
+        <form onSubmit={(event) => this.handleSubmit(event)}>
           <div className='mb-3'>
             <label className='form-label'>Destination Name</label>
             <input
@@ -159,7 +168,7 @@ class AddDestination extends Component {
             ></textarea>
           </div>
           <div className='button-area'>
-            <button className='add-destination-button' to='/destinations/add'>
+            <button className='add-destination-button'>
               <div className='text-primary'>Submit</div>
             </button>
           </div>
