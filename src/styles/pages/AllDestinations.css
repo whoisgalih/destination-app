@@ -26,7 +26,7 @@
   height: 100px;
 }
 
-.button-area {
+.destinations .button-area {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -34,7 +34,7 @@
   margin-top: 36px;
 }
 
-.button-area > .add-destination-button {
+.destinations .button-area > .add-destination-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -45,7 +45,7 @@
   text-decoration: none;
 }
 
-.button-area > .add-destination-button > div {
+.destinations .button-area > .add-destination-button > div {
   font-weight: 600;
   font-size: 1.125rem;
   margin-right: 18px;

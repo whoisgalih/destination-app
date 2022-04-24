@@ -78,7 +78,7 @@ class AllDestinations extends Component {
 
   render() {
     return (
-      <div className='container-xxl custom-padding'>
+      <div className='container-xxl custom-padding destinations'>
         {/* prettier-ignore */}
         <PageTitle 
           sectionName='Destination' 

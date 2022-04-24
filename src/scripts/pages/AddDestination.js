@@ -1,7 +1,78 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
+// import { Link } from 'react-router-dom';
+
+import '../../styles/pages/AddDestination.css';
 
 class AddDestination extends Component {
+  constructor(props) {
+    super(props);
+
+    this.destinationName = createRef();
+
+    this.state = {};
+  }
+
+  async postData() {
+    const state = this.state;
+
+    if (state['destination-name'] && state.location && state.website && state.instagram && state.description) {
+      const response = fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: state['destination-name'],
+          location: state.location,
+          website: state.website,
+          instagram: state.instagram,
+          description: state.description,
+        }),
+      });
+
+      console.log(response.status);
+    }
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  textValidator(event) {
+    const target = event.target;
+    const value = target.value;
+
+    this.handleInputChange(event);
+    if (value.length > 2) {
+      target.className = 'form-control is-valid';
+    } else {
+      target.className = 'form-control is-invalid';
+    }
+  }
+
+  urlValidator(event) {
+    const target = event.target;
+    const value = target.value;
+
+    if (value.length > 2 && this.isValidHttpUrl(value)) {
+      this.handleInputChange(event);
+      target.className = 'form-control is-valid';
+    } else {
+      const name = target.name;
+      this.setState({
+        [name]: '',
+      });
+      target.className = 'form-control is-invalid';
+    }
+  }
+
   isValidHttpUrl(string) {
     let url;
 
@@ -23,27 +94,76 @@ class AddDestination extends Component {
           title='Add a Destination' 
         />
         <form>
-          <div class='mb-3'>
-            <label class='form-label'>Destination Name</label>
-            <input type='text' class='form-control' name='destination-name' placeholder='Destination Name' required='required' />
+          <div className='mb-3'>
+            <label className='form-label'>Destination Name</label>
+            <input
+              type='text'
+              className='form-control'
+              name='destination-name'
+              ref={this.destinationName}
+              placeholder='Destination Name'
+              required='required'
+              onChange={(event) => {
+                this.textValidator(event);
+              }}
+            />
           </div>
-          <div class='mb-3'>
-            <label class='form-label'>Location</label>
-            <input type='text' class='form-control' name='location' placeholder='Location' required />
+          <div className='mb-3'>
+            <label className='form-label'>Location</label>
+            <input
+              type='text'
+              className='form-control'
+              name='location'
+              placeholder='Location'
+              required
+              onChange={(event) => {
+                this.urlValidator(event);
+              }}
+            />
           </div>
-          <div class='mb-3'>
-            <label class='form-label'>Website</label>
-            <input type='text' class='form-control' name='website' placeholder='Website' />
+          <div className='mb-3'>
+            <label className='form-label'>Website</label>
+            <input
+              type='text'
+              className='form-control'
+              name='website'
+              placeholder='Website'
+              onChange={(event) => {
+                this.urlValidator(event);
+              }}
+            />
           </div>
-          <div class='mb-3'>
-            <label class='form-label'>Instagram</label>
-            <input type='text' class='form-control' name='instagram' placeholder='Instagram' />
+          <div className='mb-3'>
+            <label className='form-label'>Instagram</label>
+            <input
+              type='text'
+              className='form-control'
+              name='instagram'
+              placeholder='Instagram'
+              onChange={(event) => {
+                this.urlValidator(event);
+              }}
+            />
           </div>
-          <div class='mb-3'>
-            <label class='form-label'>Description</label>
-            <textarea class='form-control' rows='5' required></textarea>
+          <div className='mb-3'>
+            <label className='form-label'>Description</label>
+            <textarea
+              placeholder='Description'
+              className='form-control'
+              name='description'
+              rows='5'
+              required
+              onChange={(event) => {
+                this.textValidator(event);
+              }}
+            ></textarea>
           </div>
-          <button type='submit'>Submit</button>
+          <div className='button-area'>
+            <button className='add-destination-button' to='/destinations/add'>
+              <div className='text-primary'>Submit</div>
+            </button>
+          </div>
+          {/* <button type='submit'>Submit</button> */}
         </form>
       </div>
     );
