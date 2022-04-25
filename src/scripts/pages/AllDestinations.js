@@ -1,6 +1,5 @@
 import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
-import DataSource from '../data/DataSource';
 import Masonry from 'react-masonry-css';
 import { Link } from 'react-router-dom';
 
@@ -17,19 +16,41 @@ class AllDestinations extends Component {
       success: null,
       width: 0,
     };
+
+    this.getData = this.getData.bind(this);
+  }
+
+  async deleteDestination(id) {
+    try {
+      let response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getData() {
     try {
-      const data = await DataSource.fetchJSON('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations');
+      const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations');
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      const json = await response.json();
       this.setState({
-        destinations: data,
+        destinations: json,
         success: true,
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       this.setState({
-        destinations: null,
+        destinations: [],
         success: false,
       });
     }
@@ -44,6 +65,14 @@ class AllDestinations extends Component {
         name={destination.name} 
         description={destination.description} 
         image={destination.image}
+        deleteCallback={async (id) => {
+          try {
+            await this.deleteDestination(id);
+            await this.getData()
+          } catch (error) {
+            console.log(error)
+          }
+        }}
       />
     );
 
@@ -57,7 +86,6 @@ class AllDestinations extends Component {
     this.setState({
       width: this.sizer.current.offsetWidth,
     });
-    console.log(this.state.width);
   }
 
   componentDidMount() {

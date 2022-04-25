@@ -1,17 +1,3 @@
-.destination-page > .return {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  color: #2e2e2e;
-  margin: 45px 0 64px 0;
-  text-decoration: none;
-}
-
-.destination-page > .return > .icon {
-  margin-right: 18px;
-}
-
 .destination-page > .title {
   font-weight: 600;
   font-size: 2rem;

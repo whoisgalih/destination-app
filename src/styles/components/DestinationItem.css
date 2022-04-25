@@ -27,17 +27,32 @@
   display: flex;
   flex-direction: row;
   position: absolute;
+  justify-content: center;
+  align-items: center;
+  bottom: 16px;
+  right: 16px;
+  height: 30px;
+}
+
+.destination-item > .header > .botton-right > * {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
   background-color: white;
   justify-content: center;
   align-items: center;
   border-radius: 25px;
   padding: 3px 10px;
-  bottom: 16px;
-  right: 16px;
+  height: 100%;
   color: #2e2e2e;
+  margin-left: 8px;
 }
 
-.destination-item > .header > .botton-right > .button-text {
+.destination-item > .header > .botton-right > *:hover {
+  cursor: pointer;
+}
+
+.destination-item > .header > .botton-right > * > .button-text {
   margin-right: 5px;
 }
 

@@ -39,9 +39,7 @@ class NavBar extends Component {
       path = '/home/';
     }
 
-    console.log(path);
     path = path.substring(path.indexOf('/') + 1, path.indexOf('/', 1));
-    console.log(path);
 
     const menu = this.menu.current;
     const children = menu.children;

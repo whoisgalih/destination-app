@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
-// import { Link } from 'react-router-dom';
+import ReturnButton from '../components/ReturnButton';
 
 import '../../styles/pages/AddDestination.css';
 
@@ -97,6 +97,7 @@ class AddDestination extends Component {
   render() {
     return (
       <div className='container-xxl custom-padding add-destination'>
+        <ReturnButton to='/destinations' />
         {/* prettier-ignore */}
         <PageTitle 
           sectionName='add destination' 
