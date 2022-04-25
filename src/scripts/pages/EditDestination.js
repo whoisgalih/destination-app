@@ -2,7 +2,6 @@ import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
 import ReturnButton from '../components/ReturnButton';
 
-import '../../styles/pages/AddDestination.css';
 import { Navigate } from 'react-router-dom';
 
 class EditDestination extends Component {

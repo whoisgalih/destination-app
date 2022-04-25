@@ -6,6 +6,7 @@
   color: #2e2e2e;
   margin: 45px 0 64px 0;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .return > .return > .icon {
