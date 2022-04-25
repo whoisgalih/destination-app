@@ -1,11 +1,11 @@
 import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
 import ReturnButton from '../components/ReturnButton';
-import { Navigate } from 'react-router-dom';
 
 import '../../styles/pages/AddDestination.css';
+import { Navigate } from 'react-router-dom';
 
-class AddDestination extends Component {
+class EditDestination extends Component {
   constructor(props) {
     super(props);
 
@@ -15,14 +15,50 @@ class AddDestination extends Component {
     this.instagram = createRef();
     this.description = createRef();
 
-    this.state = {};
+    this.state = {
+      data: {},
+    };
   }
 
-  async postData() {
+  async componentDidMount() {
+    const destinationId = window.location.pathname.replace('/destinations/', '').replace('/edit', '');
+
+    await this.getData(destinationId);
+
+    this.destinationName.current.value = this.state.data.name;
+    this.location.current.value = this.state.data.location;
+    this.website.current.value = this.state.data.website;
+    this.instagram.current.value = this.state.data.instagram;
+    this.description.current.value = this.state.data.description;
+  }
+
+  async getData(id) {
+    try {
+      const response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${id}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      const json = await response.json();
+      this.setState({
+        data: json,
+        success: true,
+      });
+    } catch (e) {
+      console.log(e);
+      this.setState({
+        data: {},
+        success: false,
+      });
+    }
+  }
+
+  async putData() {
     if (this.destinationName.current.value && this.location.current.value && this.description.current.value) {
       try {
-        const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
-          method: 'POST', // or 'PUT'
+        const response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${this.state.data.id}`, {
+          method: 'PUT', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
           },
@@ -38,9 +74,6 @@ class AddDestination extends Component {
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status}`);
         }
-
-        const json = await response.json();
-        return json.id;
       } catch (error) {
         console.log(error);
       }
@@ -49,9 +82,8 @@ class AddDestination extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const id = await this.postData();
+    await this.putData();
     this.setState({
-      id,
       finish: true,
     });
   }
@@ -78,7 +110,9 @@ class AddDestination extends Component {
       this.setState({
         [name]: '',
       });
-      target.className = 'form-control is-invalid';
+      if (target.name === 'location') {
+        target.className = 'form-control is-invalid';
+      }
     }
   }
 
@@ -100,8 +134,9 @@ class AddDestination extends Component {
         <ReturnButton to='/destinations' />
         {/* prettier-ignore */}
         <PageTitle 
-          sectionName='add destination' 
-          title='Add a Destination' 
+          sectionName='edit destination' 
+          title='Edit Destination'
+          subtitle={`With id: ${this.state.data.id}`}
         />
         <form onSubmit={(event) => this.handleSubmit(event)}>
           <div className='mb-3'>
@@ -177,11 +212,13 @@ class AddDestination extends Component {
               <div className='text-primary'>Submit</div>
             </button>
           </div>
-          {this.state.finish ? <Navigate to={`/destinations/${this.state.id}`} /> : <div></div>}
+          {this.state.success === false ? <Navigate to='/404' /> : <div></div>}
+          {this.state.finish ? <Navigate to={`/destinations/${this.state.data.id}`} /> : <div></div>}
+          {/* <button type='submit'>Submit</button> */}
         </form>
       </div>
     );
   }
 }
 
-export default AddDestination;
+export default EditDestination;
