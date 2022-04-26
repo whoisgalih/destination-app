@@ -3,6 +3,7 @@ import PageTitle from '../components/PageTitle';
 import ReturnButton from '../components/ReturnButton';
 
 import { Navigate } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 class EditDestination extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class EditDestination extends Component {
 
     this.state = {
       data: {},
+      success: null,
     };
   }
 
@@ -42,6 +44,7 @@ class EditDestination extends Component {
       }
 
       const json = await response.json();
+
       this.setState({
         data: json,
         success: true,
@@ -138,9 +141,12 @@ class EditDestination extends Component {
         <PageTitle 
           sectionName='edit destination' 
           title='Edit Destination'
-          subtitle={`With id: ${this.state.data.id}`}
+          subtitle={`With id: ${!this.state.data.id? '' : this.state.data.id}`}
         />
-        <form onSubmit={(event) => this.handleSubmit(event)}>
+        <div className={this.state.success === null ? '' : 'none'}>
+          <Spinner />
+        </div>
+        <form onSubmit={(event) => this.handleSubmit(event)} className={this.state.success === null ? 'none' : ''}>
           <div className='mb-3'>
             <label className='form-label'>Destination Name</label>
             <input
