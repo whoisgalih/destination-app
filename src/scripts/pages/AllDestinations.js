@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import '../../styles/pages/AllDestinations.css';
 import DestinationItem from '../components/DestinationItem';
+import Spinner from '../components/Spinner';
 
 class AllDestinations extends Component {
   constructor(props) {
@@ -47,6 +48,12 @@ class AllDestinations extends Component {
         destinations: json,
         success: true,
       });
+
+      this.updateDimension();
+
+      setTimeout(() => {
+        this.updateDimension();
+      }, 2000);
     } catch (error) {
       console.log(error);
       this.setState({
@@ -95,11 +102,11 @@ class AllDestinations extends Component {
       this.updateDimension();
     });
 
-    this.updateDimension();
+    // this.updateDimension();
 
-    setTimeout(() => {
-      this.updateDimension();
-    }, 2000);
+    // setTimeout(() => {
+    //   this.updateDimension();
+    // }, 2000);
   }
 
   componentWillUnmount() {
@@ -141,22 +148,28 @@ class AllDestinations extends Component {
             </Link>
           </div>
         </PageTitle>
-        <Masonry
-          breakpointCols={{
-            default: 3,
-            992: 2,
-            576: 1,
-          }}
-          className='destination-list'
-          columnClassName='destination-list-item'
-        >
-          {this.destinationsJSX()}
-        </Masonry>
-        <style>{`
-          .destination-item > .header > .image {
-            height: ${this.state.width}px;
-          }
-        `}</style>
+        {this.state.success === null ? (
+          <Spinner />
+        ) : (
+          <div>
+            <Masonry
+              breakpointCols={{
+                default: 3,
+                992: 2,
+                576: 1,
+              }}
+              className='destination-list'
+              columnClassName='destination-list-item'
+            >
+              {this.destinationsJSX()}
+            </Masonry>
+            <style>{`
+              .destination-item > .header > .image {
+                height: ${this.state.width}px;
+              }
+            `}</style>
+          </div>
+        )}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../../styles/pages/Destination.css';
 import { Navigate, Link } from 'react-router-dom';
 import ReturnButton from '../components/ReturnButton';
+import Spinner from '../components/Spinner';
 
 class Destination extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Destination extends Component {
       });
 
       this.renderSocial();
+      this.renderDescription();
     } catch (e) {
       console.log(e);
       this.setState({
@@ -106,6 +108,15 @@ class Destination extends Component {
     }
   }
 
+  renderDescription() {
+    this.setState((prevState) => ({
+      data: {
+        ...prevState.data,
+        description: prevState.data.description.split('\n').map((str) => <p>{str}</p>),
+      },
+    }));
+  }
+
   componentDidMount() {
     const destinationId = window.location.pathname.replace('/destinations/', '');
 
@@ -116,47 +127,50 @@ class Destination extends Component {
     return (
       <div className='destination-page container-xxl custom-padding'>
         <ReturnButton to='/destinations' />
-        <div className='title'>{this.state.data.name}</div>
-        <div className='header'>
-          <div className='image'>
-            <img src={this.state.data.image} alt='' />
-          </div>
-          <div className='botton-right'>
-            <Link to={`/destinations/${this.state.data.id}/edit`}>
-              <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-pencil' width='16' height='16' viewBox='0 0 24 24' strokeWidth='2' stroke='#2c3e50' fill='none' strokeLinecap='round' strokeLinejoin='round'>
-                <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-                <path d='M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4'></path>
-                <line x1='13.5' y1='6.5' x2='17.5' y2='10.5'></line>
-              </svg>
-            </Link>
-            <div
-              onClick={async () => {
-                await this.deleteDestination(this.state.data.id);
-                this.setState({
-                  finish: true,
-                });
-              }}
-            >
-              <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-trash' width='16' height='16' viewBox='0 0 24 24' strokeWidth='2' stroke='#2c3e50' fill='none' strokeLinecap='round' strokeLinejoin='round'>
-                <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-                <line x1='4' y1='7' x2='20' y2='7'></line>
-                <line x1='10' y1='11' x2='10' y2='17'></line>
-                <line x1='14' y1='11' x2='14' y2='17'></line>
-                <path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12'></path>
-                <path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3'></path>
-              </svg>
+        {this.state.success === null ? (
+          <Spinner />
+        ) : (
+          <div>
+            <div className='title'>{this.state.data.name}</div>
+            <div className='header'>
+              <div className='image'>
+                <img src={this.state.data.image} alt='' />
+              </div>
+              <div className='botton-right'>
+                <Link to={`/destinations/${this.state.data.id}/edit`}>
+                  <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-pencil' width='16' height='16' viewBox='0 0 24 24' strokeWidth='2' stroke='#2c3e50' fill='none' strokeLinecap='round' strokeLinejoin='round'>
+                    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+                    <path d='M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4'></path>
+                    <line x1='13.5' y1='6.5' x2='17.5' y2='10.5'></line>
+                  </svg>
+                </Link>
+                <div
+                  onClick={async () => {
+                    await this.deleteDestination(this.state.data.id);
+                    this.setState({
+                      finish: true,
+                    });
+                  }}
+                >
+                  <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-trash' width='16' height='16' viewBox='0 0 24 24' strokeWidth='2' stroke='#2c3e50' fill='none' strokeLinecap='round' strokeLinejoin='round'>
+                    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+                    <line x1='4' y1='7' x2='20' y2='7'></line>
+                    <line x1='10' y1='11' x2='10' y2='17'></line>
+                    <line x1='14' y1='11' x2='14' y2='17'></line>
+                    <path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12'></path>
+                    <path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3'></path>
+                  </svg>
+                </div>
+              </div>
             </div>
+            <div className='social'>
+              <div>{this.state.social}</div>
+            </div>
+            <div>{this.state.data.description}</div>
+            {this.state.finish ? <Navigate to={`/destinations`} /> : <div></div>}
+            {this.state.success === false ? <Navigate to='/404' /> : <div></div>}
           </div>
-        </div>
-        <div className='social'>
-          <div>{this.state.social}</div>
-        </div>
-        <p>{this.state.data.description}</p>
-        <div className='other-destinations'>
-          <div className='destinations'></div>
-        </div>
-        {this.state.finish ? <Navigate to={`/destinations`} /> : <div></div>}
-        {this.state.success === false ? <Navigate to='/404' /> : <div></div>}
+        )}
       </div>
     );
   }
