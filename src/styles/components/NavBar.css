@@ -67,7 +67,7 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     justify-content: flex-start;

@@ -1,0 +1,39 @@
+.button-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+  margin-right: -18px;
+  margin-bottom: 0;
+}
+
+.button-area > .button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14.5px 25px;
+  background: #ffeded;
+  border-radius: 44px;
+  text-decoration: none;
+  margin-right: 18px;
+}
+
+.button-area > .button > div {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+@media screen and (max-width: 576px) {
+  .button-area {
+    margin-right: 0px;
+    margin-bottom: -18px;
+    flex-direction: column;
+  }
+
+  .button-area > .button {
+    margin-right: 0px;
+    margin-bottom: 18px;
+  }
+}
