@@ -10,6 +10,7 @@ class EditDestination extends Component {
 
     this.destinationName = createRef();
     this.location = createRef();
+    this.image = createRef();
     this.website = createRef();
     this.instagram = createRef();
     this.description = createRef();
@@ -25,6 +26,7 @@ class EditDestination extends Component {
     await this.getData(destinationId);
 
     this.destinationName.current.value = this.state.data.name;
+    this.image.current.value = this.state.data.image;
     this.location.current.value = this.state.data.location;
     this.website.current.value = this.state.data.website;
     this.instagram.current.value = this.state.data.instagram;
@@ -54,7 +56,7 @@ class EditDestination extends Component {
   }
 
   async putData() {
-    if (this.destinationName.current.value && this.location.current.value && this.description.current.value) {
+    if (this.destinationName.current.value && this.location.current.value && this.location.current.value && this.description.current.value) {
       try {
         const response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${this.state.data.id}`, {
           method: 'PUT', // or 'PUT'
@@ -63,6 +65,7 @@ class EditDestination extends Component {
           },
           body: JSON.stringify({
             name: this.destinationName.current.value,
+            image: this.image.current.value,
             location: this.location.current.value,
             website: this.website.current.value,
             instagram: this.instagram.current.value,
@@ -153,7 +156,21 @@ class EditDestination extends Component {
             />
           </div>
           <div className='mb-3'>
-            <label className='form-label'>Location</label>
+            <label className='form-label'>Image Url</label>
+            <input
+              type='text'
+              className='form-control'
+              name='image'
+              ref={this.image}
+              placeholder='Image Url'
+              required
+              onChange={(event) => {
+                this.urlValidator(event);
+              }}
+            />
+          </div>
+          <div className='mb-3'>
+            <label className='form-label'>Location Url</label>
             <input
               type='text'
               className='form-control'

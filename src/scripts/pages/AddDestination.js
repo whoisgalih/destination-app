@@ -11,6 +11,7 @@ class AddDestination extends Component {
 
     this.destinationName = createRef();
     this.location = createRef();
+    this.image = createRef();
     this.website = createRef();
     this.instagram = createRef();
     this.description = createRef();
@@ -19,7 +20,7 @@ class AddDestination extends Component {
   }
 
   async postData() {
-    if (this.destinationName.current.value && this.location.current.value && this.description.current.value) {
+    if (this.destinationName.current.value && this.location.current.value && this.location.current.value && this.description.current.value) {
       try {
         const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
           method: 'POST', // or 'PUT'
@@ -28,6 +29,7 @@ class AddDestination extends Component {
           },
           body: JSON.stringify({
             name: this.destinationName.current.value,
+            image: this.location.current.value,
             location: this.location.current.value,
             website: this.website.current.value,
             instagram: this.instagram.current.value,
@@ -119,7 +121,21 @@ class AddDestination extends Component {
             />
           </div>
           <div className='mb-3'>
-            <label className='form-label'>Location</label>
+            <label className='form-label'>Image Url</label>
+            <input
+              type='text'
+              className='form-control'
+              name='image'
+              ref={this.image}
+              placeholder='Image Url'
+              required
+              onChange={(event) => {
+                this.urlValidator(event);
+              }}
+            />
+          </div>
+          <div className='mb-3'>
+            <label className='form-label'>Location Url</label>
             <input
               type='text'
               className='form-control'
