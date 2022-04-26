@@ -3,7 +3,7 @@ import PageTitle from '../components/PageTitle';
 
 import Alfian from '../../assets/image/1588562202489.jpg';
 import Alif from '../../assets/image/IMG-20220422-WA0000.jpg';
-import Galih from '../../assets/image/image0.jpg';
+import Galih from '../../assets/image/1646824645076.jpg';
 
 class AboutUs extends Component {
   render() {
@@ -19,8 +19,7 @@ class AboutUs extends Component {
             <div className='card h-100'>
               <img src={Alfian} className='card-img-top' alt='Alfian' />
               <div className='card-body'>
-                <h5 className='card-title'>Card title</h5>
-                <p className='card-text'>This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 className='card-title'>Alfian Ananda Putra</h5>
               </div>
             </div>
           </div>
@@ -28,8 +27,7 @@ class AboutUs extends Component {
             <div className='card h-100'>
               <img src={Alif} className='card-img-top' alt='Alif' />
               <div className='card-body'>
-                <h5 className='card-title'>Card title</h5>
-                <p className='card-text'>This is a short card.</p>
+                <h5 className='card-title'>Alifio Yudhistira Aji Salis</h5>
               </div>
             </div>
           </div>
@@ -37,12 +35,10 @@ class AboutUs extends Component {
             <div className='card h-100'>
               <img src={Galih} className='card-img-top' alt='Galih' />
               <div className='card-body'>
-                <h5 className='card-title'>Card title</h5>
-                <p className='card-text'>This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                <h5 className='card-title'>Galih Akbar Nugraha</h5>
               </div>
             </div>
           </div>
-          S
         </div>
       </div>
     );
