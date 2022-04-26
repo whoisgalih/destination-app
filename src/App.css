@@ -2,10 +2,8 @@
   padding: 21px 70px;
 }
 
-/* .text-primary {
-  color: #2e2e2e;
+@media screen and (max-width: 992px) {
+  .custom-padding {
+    padding: 21px 20px;
+  }
 }
-
-.text-secondary {
-  color: #909090;
-} */

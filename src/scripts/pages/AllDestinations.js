@@ -96,6 +96,10 @@ class AllDestinations extends Component {
     });
 
     this.updateDimension();
+
+    setTimeout(() => {
+      this.updateDimension();
+    }, 2000);
   }
 
   componentWillUnmount() {

@@ -40,3 +40,15 @@
 .destination-page > p {
   color: #8e8e8e;
 }
+
+@media screen and (max-width: 992px) {
+  .destination-page > .header > .image {
+    height: 25rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .destination-page > .header > .image {
+    height: 20rem;
+  }
+}

@@ -12,3 +12,15 @@
 .return > .return > .icon {
   margin-right: 18px;
 }
+
+@media screen and (max-width: 992px) {
+  .return > .return {
+    margin: 20px 0 64px 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .return > .return {
+    margin: 0 0 64px 0;
+  }
+}

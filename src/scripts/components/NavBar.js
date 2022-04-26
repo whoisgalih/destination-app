@@ -7,6 +7,10 @@ class NavBar extends Component {
     super(props);
 
     this.menu = createRef();
+
+    this.state = {
+      hidden: true,
+    };
   }
 
   changeActive(e) {
@@ -43,16 +47,19 @@ class NavBar extends Component {
 
     const menu = this.menu.current;
     const children = menu.children;
+
     for (const child in children) {
       if (Object.hasOwnProperty.call(children, child)) {
-        const element = children[child];
-        const pageName = element.innerText;
+        try {
+          const element = children[child];
+          const pageName = element.innerText;
 
-        if (path === this.toKebabCase(pageName)) {
-          element.className = 'menu-item active';
-        } else {
-          element.className = 'menu-item';
-        }
+          if (path === this.toKebabCase(pageName)) {
+            element.className = 'menu-item active';
+          } else {
+            element.className = 'menu-item';
+          }
+        } catch (error) {}
       }
     }
   }
@@ -60,20 +67,53 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <div className='navbar container-xxl custom-padding'>
-          <Link className='app-title' to='/'>
-            Destination App
-          </Link>
-          <div ref={this.menu} className='nav-menu'>
-            <Link className='menu-item ' to='/' onClick={(e) => this.changeActive(e)}>
-              Home
-            </Link>
-            <Link className='menu-item' to='/destinations' onClick={(e) => this.changeActive(e)}>
-              Destinations
-            </Link>
-            <Link className='menu-item' to='/about-us' onClick={(e) => this.changeActive(e)}>
-              About Us
-            </Link>
+        <div className='space-replace'></div>
+        <div className='sticky'>
+          <div className={`navbar container-xxl custom-padding${this.state.hidden ? ' hidden' : ''}`}>
+            <div className='title'>
+              <Link className='app-title' to='/'>
+                Destination App
+              </Link>
+              <svg
+                onClick={() => {
+                  if (this.state.hidden) {
+                    this.setState({
+                      hidden: false,
+                    });
+                  } else {
+                    this.setState({
+                      hidden: true,
+                    });
+                  }
+                }}
+                xmlns='http://www.w3.org/2000/svg'
+                className='icon icon-tabler icon-tabler-menu-2 menu-icon'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                strokeWidth='2'
+                stroke='#2e2e2e'
+                fill='none'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+                <line x1='4' y1='6' x2='20' y2='6'></line>
+                <line x1='4' y1='12' x2='20' y2='12'></line>
+                <line x1='4' y1='18' x2='20' y2='18'></line>
+              </svg>
+            </div>
+            <div ref={this.menu} className='nav-menu'>
+              <Link className='menu-item ' to='/' onClick={(e) => this.changeActive(e)}>
+                Home
+              </Link>
+              <Link className='menu-item' to='/destinations' onClick={(e) => this.changeActive(e)}>
+                Destinations
+              </Link>
+              <Link className='menu-item' to='/about-us' onClick={(e) => this.changeActive(e)}>
+                About Us
+              </Link>
+            </div>
           </div>
         </div>
       </div>

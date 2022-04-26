@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Joyride-Round';
-  src: url('../../fonts/Joyride-Round.otf') format('opentype');
+  src: url('../../assets/fonts/Joyride-Round.otf') format('opentype');
 }
 
 .center-title {
@@ -24,5 +24,16 @@
 
 .center-title > .subtitle {
   font-family: 'Inter';
-  /* fooont */
+}
+
+@media screen and (max-width: 992px) {
+  .center-title {
+    margin: 100px auto 90px auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .center-title {
+    margin: 75px auto 70px auto;
+  }
 }

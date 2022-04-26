@@ -27,7 +27,6 @@ export class App extends Component {
           <Route exact path='/destinations/:id' element={<Destination />} />
           <Route exact path='/destinations' element={<AllDestinations />} />
           <Route exact path='/about-us' element={<AboutUs />} />
-          {/* <Route exact path='/404' element={<Error404 />} /> */}
         </Routes>
       </div>
     );

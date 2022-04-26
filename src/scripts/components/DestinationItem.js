@@ -14,7 +14,7 @@ class DestinationItem extends Component {
         <div className='destination-item'>
           <div className='header'>
             <div className='image'>
-              <img src={this.props.image} alt={this.props.name} style={{ height: this.props.imageHeight }} />
+              <img src={this.props.image} alt={this.props.name} />
             </div>
             <div className='botton-right'>
               <Link to={`/destinations/${this.props.id}/edit`}>
