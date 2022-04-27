@@ -118,7 +118,7 @@ class Destination extends Component {
   }
 
   componentDidMount() {
-    const destinationId = window.location.pathname.replace('/destinations/', '');
+    const destinationId = window.location.hash.replace('#/destinations/', '');
 
     this.getData(destinationId);
   }
@@ -126,7 +126,7 @@ class Destination extends Component {
   render() {
     return (
       <div className='destination-page container-xxl custom-padding'>
-        <ReturnButton to='/destinations' />
+        <ReturnButton to={`/destinations`} />
         {this.state.success === null ? (
           <Spinner />
         ) : (
@@ -168,7 +168,7 @@ class Destination extends Component {
             </div>
             <div>{this.state.data.description}</div>
             {this.state.finish ? <Navigate to={`/destinations`} /> : <div></div>}
-            {this.state.success === false ? <Navigate to='/404' /> : <div></div>}
+            {this.state.success === false ? <Navigate to={`/404`} /> : <div></div>}
           </div>
         )}
       </div>

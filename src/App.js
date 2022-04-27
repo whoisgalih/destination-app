@@ -21,12 +21,12 @@ export class App extends Component {
         <NavBar />
         <Routes>
           <Route path='*' element={<Error404 />} />
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/destinations/add' element={<AddDestination />} />
-          <Route exact path='/destinations/:id/edit' element={<EditDestination />} />
-          <Route exact path='/destinations/:id' element={<Destination />} />
-          <Route exact path='/destinations' element={<AllDestinations />} />
-          <Route exact path='/about-us' element={<AboutUs />} />
+          <Route exact path={`/`} element={<Home />} />
+          <Route exact path={`/destinations/add`} element={<AddDestination />} />
+          <Route exact path={`/destinations/:id/edit`} element={<EditDestination />} />
+          <Route exact path={`/destinations/:id`} element={<Destination />} />
+          <Route exact path={`/destinations`} element={<AllDestinations />} />
+          <Route exact path={`/about-us`} element={<AboutUs />} />
         </Routes>
       </div>
     );

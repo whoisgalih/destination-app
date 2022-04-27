@@ -23,7 +23,7 @@ class EditDestination extends Component {
   }
 
   async componentDidMount() {
-    const destinationId = window.location.pathname.replace('/destinations/', '').replace('/edit', '');
+    const destinationId = window.location.hash.replace('#/destinations/', '').replace('/edit', '');
 
     await this.getData(destinationId);
 
@@ -136,7 +136,7 @@ class EditDestination extends Component {
   render() {
     return (
       <div className='container-xxl custom-padding add-destination'>
-        <ReturnButton to='/destinations' />
+        <ReturnButton to={`/destinations`} />
         {/* prettier-ignore */}
         <PageTitle 
           sectionName='edit destination' 
@@ -234,7 +234,7 @@ class EditDestination extends Component {
               <div className='text-primary'>Submit</div>
             </button>
           </div>
-          {this.state.success === false ? <Navigate to='/404' /> : <div></div>}
+          {this.state.success === false ? <Navigate to={`/404`} /> : <div></div>}
           {this.state.finish ? <Navigate to={`/destinations/${this.state.data.id}`} /> : <div></div>}
           {/* <button type='submit'>Submit</button> */}
         </form>

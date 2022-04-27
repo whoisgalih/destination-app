@@ -15,12 +15,12 @@ class Home extends Component {
           subtitle='Place to explore destinations in the world'
         > 
           <div className="button-area">
-            <Link className="button" to='/destinations'>
+            <Link className="button" to={`/destinations`}>
               <div className="text-primary">
                 Go to Destination Page
               </div>
             </Link>
-            <Link className="button" to='/about-us'>
+            <Link className="button" to={`/about-us`}>
               <div className="text-primary">
                Know More About Us
               </div>

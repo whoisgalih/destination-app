@@ -99,7 +99,7 @@ class AddDestination extends Component {
   render() {
     return (
       <div className='container-xxl custom-padding add-destination'>
-        <ReturnButton to='/destinations' />
+        <ReturnButton to={`/destinations`} />
         {/* prettier-ignore */}
         <PageTitle 
           sectionName='add destination' 

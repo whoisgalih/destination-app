@@ -16,6 +16,7 @@ class AllDestinations extends Component {
       destinations: [],
       success: null,
       width: 0,
+      ready: false,
     };
 
     this.getData = this.getData.bind(this);
@@ -36,6 +37,7 @@ class AllDestinations extends Component {
   }
 
   async getData() {
+    console.log('get Data called');
     try {
       const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations');
 
@@ -44,22 +46,10 @@ class AllDestinations extends Component {
       }
 
       const json = await response.json();
-      this.setState({
-        destinations: json,
-        success: true,
-      });
 
-      this.updateDimension();
-
-      setTimeout(() => {
-        this.updateDimension();
-      }, 2000);
+      return json;
     } catch (error) {
-      console.log(error);
-      this.setState({
-        destinations: [],
-        success: false,
-      });
+      return [];
     }
   }
 
@@ -83,8 +73,12 @@ class AllDestinations extends Component {
       />
     );
 
-    jsx.splice(0, 0, <div ref={this.sizer} className='white-space-1'></div>);
-    jsx.splice(2, 0, <div className='white-space-2'></div>);
+    jsx.splice(0, 0, <div ref={this.sizer} className='white-space-1' key='ws1'></div>);
+    jsx.splice(2, 0, <div className='white-space-2' key='ws2'></div>);
+
+    this.setState({
+      ready: jsx.length === 2,
+    });
 
     return jsx;
   }
@@ -95,18 +89,22 @@ class AllDestinations extends Component {
     });
   }
 
-  componentDidMount() {
-    this.getData();
+  async componentDidMount() {
+    const destinations = await this.getData();
 
-    window.addEventListener('resize', () => {
-      this.updateDimension();
-    });
-
-    // this.updateDimension();
-
-    // setTimeout(() => {
-    //   this.updateDimension();
-    // }, 2000);
+    this.setState(
+      {
+        destinations,
+        success: true,
+      },
+      () => {
+        console.log('state updated');
+        this.updateDimension();
+        window.addEventListener('resize', () => {
+          this.updateDimension();
+        });
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -125,7 +123,7 @@ class AllDestinations extends Component {
           subtitle={`"One day, you'll leave this world behind. So live a life you will remember" ━ Avicii`} 
         >
           <div className="button-area">
-            <Link className="add-destination-button" to='/destinations/add'>
+            <Link className="add-destination-button" to={`/destinations/add`}>
               <div className="text-primary">
                 Add Destination
               </div>
@@ -161,7 +159,28 @@ class AllDestinations extends Component {
               className='destination-list'
               columnClassName='destination-list-item'
             >
-              {this.destinationsJSX()}
+              <div ref={this.sizer} key='ws1' className='white-space'></div>
+              {this.state.destinations.map((destination) => (
+                <DestinationItem
+                  key={destination.id}
+                  id={destination.id}
+                  name={destination.name}
+                  description={destination.description}
+                  image={destination.image}
+                  deleteCallback={async (id) => {
+                    try {
+                      await this.deleteDestination(id);
+                      const destinations = await this.getData();
+
+                      this.setState({
+                        destinations,
+                      });
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                />
+              ))}
             </Masonry>
             <style>{`
               .destination-item > .header > .image {

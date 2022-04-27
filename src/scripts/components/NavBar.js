@@ -71,7 +71,7 @@ class NavBar extends Component {
         <div className='sticky'>
           <div className={`navbar container-xxl custom-padding${this.state.hidden ? ' hidden' : ''}`}>
             <div className='title'>
-              <Link className='app-title' to='/'>
+              <Link className='app-title' to={`/`}>
                 Destination App
               </Link>
               <svg
@@ -104,13 +104,13 @@ class NavBar extends Component {
               </svg>
             </div>
             <div ref={this.menu} className='nav-menu'>
-              <Link className='menu-item ' to='/' onClick={(e) => this.changeActive(e)}>
+              <Link className='menu-item ' to={`/`} onClick={(e) => this.changeActive(e)}>
                 Home
               </Link>
-              <Link className='menu-item' to='/destinations' onClick={(e) => this.changeActive(e)}>
+              <Link className='menu-item' to={`/destinations`} onClick={(e) => this.changeActive(e)}>
                 Destinations
               </Link>
-              <Link className='menu-item' to='/about-us' onClick={(e) => this.changeActive(e)}>
+              <Link className='menu-item' to={`/about-us`} onClick={(e) => this.changeActive(e)}>
                 About Us
               </Link>
             </div>

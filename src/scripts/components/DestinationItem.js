@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import '../../styles/components/DestinationItem.css';
 
 class DestinationItem extends Component {
-  componentDidUpdate() {
-    this.render();
-  }
-
   render() {
     return (
       <div>
