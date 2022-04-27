@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/destination-app/static/css/main.11ebb898.css",
-    "main.js": "/destination-app/static/js/main.28011d53.js",
+    "main.js": "/destination-app/static/js/main.f08263e7.js",
     "static/js/787.87e3572b.chunk.js": "/destination-app/static/js/787.87e3572b.chunk.js",
     "static/media/IMG-20220422-WA0000.jpg": "/destination-app/static/media/IMG-20220422-WA0000.a083c2dae98dd8bb2703.jpg",
     "static/media/1646824645076.jpg": "/destination-app/static/media/1646824645076.dbde1cdaa703a6bee8a0.jpg",
@@ -9,11 +9,11 @@
     "static/media/Joyride-Round.otf": "/destination-app/static/media/Joyride-Round.1a7dc95337e755e80df4.otf",
     "index.html": "/destination-app/index.html",
     "main.11ebb898.css.map": "/destination-app/static/css/main.11ebb898.css.map",
-    "main.28011d53.js.map": "/destination-app/static/js/main.28011d53.js.map",
+    "main.f08263e7.js.map": "/destination-app/static/js/main.f08263e7.js.map",
     "787.87e3572b.chunk.js.map": "/destination-app/static/js/787.87e3572b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.11ebb898.css",
-    "static/js/main.28011d53.js"
+    "static/js/main.f08263e7.js"
   ]
 }
