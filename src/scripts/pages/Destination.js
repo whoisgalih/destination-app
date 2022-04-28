@@ -43,8 +43,8 @@ class Destination extends Component {
 
   renderSocial() {
     const social = {
-      website: this.state.data.website,
-      instagram: this.state.data.instagram,
+      website: this.state.data.website_url,
+      instagram: this.state.data.instagram_url,
       location: this.state.data.location,
     };
 
@@ -52,7 +52,7 @@ class Destination extends Component {
 
     const jsx = {
       website: (link) => (
-        <a className='web' href={link} target='blank'>
+        <a className='web' href={link} target='blank' key='1'>
           <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-world' width='24' height='24' viewBox='0 0 24 24' strokeWidth='2' stroke='#cecece' fill='none' strokeLinecap='round' strokeLinejoin='round'>
             <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
             <circle cx='12' cy='12' r='9'></circle>
@@ -64,7 +64,7 @@ class Destination extends Component {
         </a>
       ),
       instagram: (link) => (
-        <a className='insta' href={link} target='blank'>
+        <a className='insta' href={link} target='blank' key='2'>
           <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-brand-instagram' width='24' height='24' viewBox='0 0 24 24' strokeWidth='2' stroke='#cecece' fill='none' strokeLinecap='round' strokeLinejoin='round'>
             <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
             <rect x='4' y='4' width='16' height='16' rx='4'></rect>
@@ -74,7 +74,7 @@ class Destination extends Component {
         </a>
       ),
       location: (link) => (
-        <a className='location' href={link} target='blank'>
+        <a className='location' href={link} target='blank' key='3'>
           <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-map-2' width='24' height='24' viewBox='0 0 24 24' strokeWidth='2' stroke='#cecece' fill='none' strokeLinecap='round' strokeLinejoin='round'>
             <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
             <line x1='18' y1='6' x2='18' y2='6.01'></line>
@@ -112,7 +112,7 @@ class Destination extends Component {
     this.setState((prevState) => ({
       data: {
         ...prevState.data,
-        description: prevState.data.description.split('\n').map((str) => <p>{str}</p>),
+        description: prevState.data.description.split('\n').map((str, i) => <p key={i}>{str}</p>),
       },
     }));
   }

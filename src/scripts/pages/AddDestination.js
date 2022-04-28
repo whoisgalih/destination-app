@@ -31,8 +31,8 @@ class AddDestination extends Component {
             name: this.destinationName.current.value,
             image: this.location.current.value,
             location: this.location.current.value,
-            website: this.website.current.value,
-            instagram: this.instagram.current.value,
+            website_url: this.website.current.value,
+            instagram_url: this.instagram.current.value,
             description: this.description.current.value,
           }),
         });

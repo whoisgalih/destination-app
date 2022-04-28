@@ -36,8 +36,8 @@ class EditDestination extends Component {
         this.destinationName.current.value = this.state.data.name;
         this.image.current.value = this.state.data.image;
         this.location.current.value = this.state.data.location;
-        this.website.current.value = this.state.data.website;
-        this.instagram.current.value = this.state.data.instagram;
+        this.website.current.value = this.state.data.website_url;
+        this.instagram.current.value = this.state.data.instagram_url;
         this.description.current.value = this.state.data.description;
       }
     );
@@ -73,8 +73,8 @@ class EditDestination extends Component {
             name: this.destinationName.current.value,
             image: this.image.current.value,
             location: this.location.current.value,
-            website: this.website.current.value,
-            instagram: this.instagram.current.value,
+            website_url: this.website.current.value,
+            instagram_url: this.instagram.current.value,
             description: this.description.current.value,
           }),
         });
