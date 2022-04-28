@@ -24,7 +24,7 @@ class AllDestinations extends Component {
 
   async deleteDestination(id) {
     try {
-      let response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${id}`, {
         method: 'DELETE',
       });
 
@@ -38,7 +38,7 @@ class AllDestinations extends Component {
 
   async getData() {
     try {
-      const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations');
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`);
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -46,7 +46,7 @@ class AllDestinations extends Component {
 
       const json = await response.json();
 
-      return json;
+      return json.data;
     } catch (error) {
       return [];
     }

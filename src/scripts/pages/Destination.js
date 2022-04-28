@@ -18,20 +18,23 @@ class Destination extends Component {
 
   async getData(id) {
     try {
-      const response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${id}`);
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
 
       const json = await response.json();
-      this.setState({
-        data: json,
-        success: true,
-      });
-
-      this.renderSocial();
-      this.renderDescription();
+      this.setState(
+        {
+          data: json.data,
+          success: true,
+        },
+        () => {
+          this.renderSocial();
+          this.renderDescription();
+        }
+      );
     } catch (e) {
       console.log(e);
       this.setState({
@@ -96,7 +99,7 @@ class Destination extends Component {
 
   async deleteDestination(id) {
     try {
-      let response = await fetch(`https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations/${id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${id}`, {
         method: 'DELETE',
       });
 

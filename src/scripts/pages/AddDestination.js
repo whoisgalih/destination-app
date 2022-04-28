@@ -22,7 +22,7 @@ class AddDestination extends Component {
   async postData() {
     if (this.destinationName.current.value && this.location.current.value && this.location.current.value && this.description.current.value) {
       try {
-        const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`, {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ class AddDestination extends Component {
         }
 
         const json = await response.json();
-        return json.id;
+        return json.data.id;
       } catch (error) {
         console.log(error);
       }
