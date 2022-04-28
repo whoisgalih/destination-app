@@ -35,7 +35,7 @@ Setelah menyalin repo, anda harus menginstall dependencies dengan menuliskan kod
 npm install
 ```
 
-Membuat file `.env` (atau memodifikasi) yang berisi:
+Membuat (atau memodifikasi) file `.env` yang berisi:
 
 ```
 REACT_APP_BASENAME=<YOUR_PATH_NAME>
