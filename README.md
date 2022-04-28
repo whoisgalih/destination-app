@@ -8,8 +8,6 @@ Pada repository ini , dibuat Front-End dari **[REST API](https://github.com/craf
 1. Alifio Y. A. S ([Xenosians](https://github.com/Xenosians))
 1. Galih Akbar Nugraha ([whoisgalih](https://github.com/whoisgalih))
 
----
-
 ## Tech
 
 1. [React](https://reactjs.org/)
@@ -22,22 +20,29 @@ Pada repository ini , dibuat Front-End dari **[REST API](https://github.com/craf
 
 ## Usage
 
-In the project directory, you can run:
-
 ### Clone Repository
 
-`git clone https://github.com/whoisgalih/destination-app.git`
+Untuk menjalankan project ini, diperlukan unutk menyalin repo in ke komputer local.\
+Anda dapat clone repo melalui perintah `git clone` di **command line interface (CLI)** Anda.
 
-Menginstall dependencies:
+```
+git clone https://github.com/whoisgalih/destination-app.git
+```
 
-`npm install`
+Setelah menyalin repo, anda harus menginstall dependencies dengan menuliskan kode berikut di **CLI**
 
-Membuat file `.env` yang berisi:
+```
+npm install
+```
+
+Membuat file `.env` (atau memodifikasi) yang berisi:
 
 ```
 REACT_APP_BASENAME=<YOUR_PATH_NAME>
 REACT_APP_BACKEND_BASE=<YOUR_BACKEND_SERVER>
 ```
+
+**!!! File `.env` akan masuk ke code javasicrpt saat di build, pastikan tidak menulis hal yang bersifat rahasia !!!**
 
 #### Try It Now
 
@@ -45,7 +50,7 @@ Aplikasi **front-end** yang sudah di build terdapat di [https://whoisgalih.githu
 
 ### Available Scripts
 
-`npm start`
+#### `npm start`
 
 Menjalankan aplikasi dalam mode development.\
 Buka [http://localhost:4000](http://localhost:4000) untuk melihat dalam browser.
@@ -53,7 +58,7 @@ Buka [http://localhost:4000](http://localhost:4000) untuk melihat dalam browser.
 Halaman akan otomatis reload saat terdapat perubahan.\
 Anda juga dapat melihat lint error di console.
 
-`npm run build`
+#### `npm run build`
 
 Build aplikasi unutk production dalam folder `build`.\
 Ini akan membuat bundle dari aplikasi dalam mode production dan mengoptimasikan build unutk performa terbaik.
@@ -61,7 +66,7 @@ Ini akan membuat bundle dari aplikasi dalam mode production dan mengoptimasikan 
 Build diperkecil dan nama file menyertakan hash.\
 Aplikasi Anda siap di-deploy!
 
-`npm deploy`
+#### `npm deploy`
 
 Mendeploy di github pages.\
 `npm deploy` secara otomatis menjalankan build dan script `predeploy`
