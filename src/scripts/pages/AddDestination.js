@@ -29,7 +29,7 @@ class AddDestination extends Component {
           },
           body: JSON.stringify({
             name: this.destinationName.current.value,
-            image: this.location.current.value,
+            image: this.image.current.value,
             location: this.location.current.value,
             website_url: this.website.current.value,
             instagram_url: this.instagram.current.value,

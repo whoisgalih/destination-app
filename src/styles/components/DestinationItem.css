@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+.destination-item > .header > .image > img {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .destination-item > .body {
   padding: 20px;
 }

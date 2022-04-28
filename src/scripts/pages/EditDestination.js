@@ -11,6 +11,7 @@ class EditDestination extends Component {
 
     this.destinationName = createRef();
     this.location = createRef();
+    // this.imageFile = createRef();
     this.image = createRef();
     this.website = createRef();
     this.instagram = createRef();
@@ -62,7 +63,13 @@ class EditDestination extends Component {
   }
 
   async putData() {
-    if (this.destinationName.current.value && this.location.current.value && this.location.current.value && this.description.current.value) {
+    if (
+      this.destinationName.current.value &&
+      // this.state.imageFile &&
+      this.image.current.value &&
+      this.location.current.value &&
+      this.description.current.value
+    ) {
       try {
         const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${this.state.data.id}`, {
           method: 'PUT', // or 'PUT'
@@ -71,6 +78,7 @@ class EditDestination extends Component {
           },
           body: JSON.stringify({
             name: this.destinationName.current.value,
+            // image: this.state.imageFile,
             image: this.image.current.value,
             location: this.location.current.value,
             website_url: this.website.current.value,
@@ -136,6 +144,31 @@ class EditDestination extends Component {
     return url.protocol === 'http:' || url.protocol === 'https:';
   }
 
+  toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  async inputImage(event) {
+    try {
+      const file = event.target.files[0];
+
+      let base64 = await this.toBase64(file);
+
+      base64 = base64.split('base64,')[1];
+
+      this.setState({
+        imageFile: base64,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
     return (
       <div className='container-xxl custom-padding add-destination'>
@@ -164,6 +197,12 @@ class EditDestination extends Component {
               }}
             />
           </div>
+          {/* <div className='mb-3'>
+            <label htmlFor='formFile' className='form-label'>
+              Image
+            </label>
+            <input className='form-control' type='file' id='formFile' accept='image/*' onChange={(event) => this.inputImage(event)} />
+          </div> */}
           <div className='mb-3'>
             <label className='form-label'>Image Url</label>
             <input
