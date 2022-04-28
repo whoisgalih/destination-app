@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Destination App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pada repository ini , dibuat Front-End dari **[REST API](https://github.com/craftalpian/Destination-App)**. Projek **Destination App** ditujukan untuk tugas **[Probation ProClub](https://github.com/helloproclub/preparation-task-se-2022)** Telkom University.
 
-## Available Scripts
+**Anggota kelompok:**
+
+1. Alfian Ananda Putra ([craftalpian](https://github.com/craftalpian))
+1. Alifio Y. A. S ([Xenosians](https://github.com/Xenosians))
+1. Galih Akbar Nugraha ([whoisgalih](https://github.com/whoisgalih))
+
+---
+
+## Tech
+
+1. [React](https://reactjs.org/)
+1. [Create React App](https://create-react-app.dev/docs/getting-started)
+1. [Bootstrap 5](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+1. [React Router Dom](https://v5.reactrouter.com/)
+1. [React Masonry CSS](https://github.com/paulcollett/react-masonry-css)
+1. [SASS](https://sass-lang.com/)
+1. [Github Pages](https://create-react-app.dev/docs/deployment/#github-pages)
+
+## Usage
 
 In the project directory, you can run:
 
-### `npm start`
+### Clone Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`git clone https://github.com/whoisgalih/destination-app.git`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Menginstall dependencies:
 
-### `npm test`
+`npm install`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Membuat file `.env` yang berisi:
 
-### `npm run build`
+```
+REACT_APP_BASENAME=<YOUR_PATH_NAME>
+REACT_APP_BACKEND_BASE=<YOUR_BACKEND_SERVER>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Try It Now
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Aplikasi **front-end** yang sudah di build terdapat di [https://whoisgalih.github.io/destination-app/](https://whoisgalih.github.io/destination-app/#/). Tentu belum lengkap karena memerlukan back-end. Silahakan mengunjungi **[Destination App Back-End](https://github.com/craftalpian/Destination-App)** untuk memperloeh aplikasi back-end dan menjalankan di server local dengan alamat `localhost:3000`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Available Scripts
 
-### `npm run eject`
+`npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Menjalankan aplikasi dalam mode development.\
+Buka [http://localhost:4000](http://localhost:4000) untuk melihat dalam browser.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Halaman akan otomatis reload saat terdapat perubahan.\
+Anda juga dapat melihat lint error di console.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`npm run build`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Build aplikasi unutk production dalam folder `build`.\
+Ini akan membuat bundle dari aplikasi dalam mode production dan mengoptimasikan build unutk performa terbaik.
 
-## Learn More
+Build diperkecil dan nama file menyertakan hash.\
+Aplikasi Anda siap di-deploy!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`npm deploy`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Mendeploy di github pages.\
+`npm deploy` secara otomatis menjalankan build dan script `predeploy`
