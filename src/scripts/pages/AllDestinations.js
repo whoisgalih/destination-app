@@ -37,7 +37,6 @@ class AllDestinations extends Component {
   }
 
   async getData() {
-    console.log('get Data called');
     try {
       const response = await fetch('https://62612173f429c20deb9b3ddb.mockapi.io/api/destinations');
 
@@ -98,7 +97,6 @@ class AllDestinations extends Component {
         success: true,
       },
       () => {
-        console.log('state updated');
         this.updateDimension();
         window.addEventListener('resize', () => {
           this.updateDimension();

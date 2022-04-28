@@ -54,17 +54,8 @@ class EditDestination extends Component {
       const json = await response.json();
 
       return json;
-
-      // this.setState({
-      //   data: json,
-      //   success: true,
-      // });
     } catch (e) {
       console.log(e);
-      // this.setState({
-      //   data: {},
-      //   success: false,
-      // });
 
       return {};
     }
