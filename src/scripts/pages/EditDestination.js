@@ -25,14 +25,22 @@ class EditDestination extends Component {
   async componentDidMount() {
     const destinationId = window.location.hash.replace('#/destinations/', '').replace('/edit', '');
 
-    await this.getData(destinationId);
+    const data = await this.getData(destinationId);
 
-    this.destinationName.current.value = this.state.data.name;
-    this.image.current.value = this.state.data.image;
-    this.location.current.value = this.state.data.location;
-    this.website.current.value = this.state.data.website;
-    this.instagram.current.value = this.state.data.instagram;
-    this.description.current.value = this.state.data.description;
+    this.setState(
+      {
+        data,
+        success: JSON.stringify(data) !== '{}',
+      },
+      () => {
+        this.destinationName.current.value = this.state.data.name;
+        this.image.current.value = this.state.data.image;
+        this.location.current.value = this.state.data.location;
+        this.website.current.value = this.state.data.website;
+        this.instagram.current.value = this.state.data.instagram;
+        this.description.current.value = this.state.data.description;
+      }
+    );
   }
 
   async getData(id) {
@@ -45,16 +53,20 @@ class EditDestination extends Component {
 
       const json = await response.json();
 
-      this.setState({
-        data: json,
-        success: true,
-      });
+      return json;
+
+      // this.setState({
+      //   data: json,
+      //   success: true,
+      // });
     } catch (e) {
       console.log(e);
-      this.setState({
-        data: {},
-        success: false,
-      });
+      // this.setState({
+      //   data: {},
+      //   success: false,
+      // });
+
+      return {};
     }
   }
 
