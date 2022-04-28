@@ -50,7 +50,7 @@ Aplikasi **front-end** yang sudah di build terdapat di [https://whoisgalih.githu
 
 ### Available Scripts
 
-#### `npm start`
+#### `npm run start`
 
 Menjalankan aplikasi dalam mode development.\
 Buka [http://localhost:4000](http://localhost:4000) untuk melihat dalam browser.
@@ -66,7 +66,7 @@ Ini akan membuat bundle dari aplikasi dalam mode production dan mengoptimasikan 
 Build diperkecil dan nama file menyertakan hash.\
 Aplikasi Anda siap di-deploy!
 
-#### `npm deploy`
+#### `npm run deploy`
 
 Mendeploy di github pages.\
 `npm deploy` secara otomatis menjalankan build dan script `predeploy`
