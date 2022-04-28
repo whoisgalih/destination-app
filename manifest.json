@@ -1,0 +1,14 @@
+{
+  "short_name": "Destination App",
+  "name": "Destination App",
+  "icons": [
+    {
+      "src": "map-2.svg",
+      "sizes": "any"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
