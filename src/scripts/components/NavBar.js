@@ -39,7 +39,7 @@ class NavBar extends Component {
   componentDidMount() {
     let path = window.location.hash + '/';
 
-    if (path === '/') {
+    if (path === '/' || path === '#//') {
       path = '/home/';
     }
 
