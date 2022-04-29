@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
 import ReturnButton from '../components/ReturnButton';
 import { Navigate } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 import '../../styles/pages/AddDestination.css';
 
@@ -16,46 +17,55 @@ class AddDestination extends Component {
     this.instagram = createRef();
     this.description = createRef();
 
-    this.state = {};
+    this.state = {
+      isLoading: false,
+    };
   }
 
   async postData() {
     if (this.destinationName.current.value && this.location.current.value && this.location.current.value && this.description.current.value) {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`, {
-          method: 'POST', // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.destinationName.current.value,
-            image: this.image.current.value,
-            location: this.location.current.value,
-            website_url: this.website.current.value,
-            instagram_url: this.instagram.current.value,
-            description: this.description.current.value,
-          }),
-        });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`, {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.destinationName.current.value,
+          image: this.image.current.value,
+          location: this.location.current.value,
+          website_url: this.website.current.value,
+          instagram_url: this.instagram.current.value,
+          description: this.description.current.value,
+        }),
+      });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        const json = await response.json();
-        return json.data.id;
-      } catch (error) {
-        console.log(error);
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
       }
+
+      const json = await response.json();
+      return json;
     }
   }
 
   async handleSubmit(event) {
     event.preventDefault();
-    const id = await this.postData();
-    this.setState({
-      id,
-      finish: true,
-    });
+    try {
+      this.setState({
+        isLoading: true,
+      });
+      const { data, message } = await this.postData();
+      this.setState({
+        id: data.id,
+        finish: true,
+      });
+      window.alert(`${message}`);
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+      });
+      window.alert('Data gagal ditambahkan');
+    }
   }
 
   textValidator(event) {
@@ -190,7 +200,7 @@ class AddDestination extends Component {
           </div>
           <div className='button-area'>
             <button className='add-destination-button'>
-              <div className='text-primary'>Submit</div>
+              <div className='text-primary'>{this.state.isLoading ? <Spinner /> : 'Submit'}</div>
             </button>
           </div>
           {this.state.finish ? <Navigate to={`/destinations/${this.state.id}`} /> : <div></div>}

@@ -106,8 +106,15 @@ class Destination extends Component {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
+
+      this.setState({
+        finish: true,
+      });
     } catch (error) {
-      console.log(error);
+      window.alert('gagal menghapus data');
+      this.setState({
+        finish: false,
+      });
     }
   }
 
@@ -150,9 +157,6 @@ class Destination extends Component {
                 <div
                   onClick={async () => {
                     await this.deleteDestination(this.state.data.id);
-                    this.setState({
-                      finish: true,
-                    });
                   }}
                 >
                   <svg xmlns='http://www.w3.org/2000/svg' className='icon icon-tabler icon-tabler-trash' width='16' height='16' viewBox='0 0 24 24' strokeWidth='2' stroke='#2c3e50' fill='none' strokeLinecap='round' strokeLinejoin='round'>

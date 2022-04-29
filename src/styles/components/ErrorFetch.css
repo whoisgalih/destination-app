@@ -1,0 +1,9 @@
+.error-fetch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-fetch > p {
+  font-family: 'Inter';
+}

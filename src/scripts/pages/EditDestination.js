@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 import PageTitle from '../components/PageTitle';
 import ReturnButton from '../components/ReturnButton';
 
+import '../../styles/components/ErrorFetch.css';
 import { Navigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
@@ -70,38 +71,48 @@ class EditDestination extends Component {
       this.location.current.value &&
       this.description.current.value
     ) {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${this.state.data.id}`, {
-          method: 'PUT', // or 'PUT'
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.destinationName.current.value,
-            // image: this.state.imageFile,
-            image: this.image.current.value,
-            location: this.location.current.value,
-            website_url: this.website.current.value,
-            instagram_url: this.instagram.current.value,
-            description: this.description.current.value,
-          }),
-        });
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${this.state.data.id}`, {
+        method: 'PUT', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.destinationName.current.value,
+          // image: this.state.imageFile,
+          image: this.image.current.value,
+          location: this.location.current.value,
+          website_url: this.website.current.value,
+          instagram_url: this.instagram.current.value,
+          description: this.description.current.value,
+        }),
+      });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-      } catch (error) {
-        console.log(error);
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
       }
+
+      const json = await response.json();
+
+      window.alert(json.message);
     }
   }
 
   async handleSubmit(event) {
     event.preventDefault();
-    await this.putData();
-    this.setState({
-      finish: true,
-    });
+    try {
+      this.setState({
+        isLoading: true,
+      });
+      await this.putData();
+      this.setState({
+        finish: true,
+      });
+    } catch (error) {
+      window.alert('Data gagal diupdate');
+      this.setState({
+        isLoading: false,
+      });
+    }
   }
 
   textValidator(event) {
@@ -153,21 +164,21 @@ class EditDestination extends Component {
     });
   }
 
-  async inputImage(event) {
-    try {
-      const file = event.target.files[0];
+  // async inputImage(event) {
+  //   try {
+  //     const file = event.target.files[0];
 
-      let base64 = await this.toBase64(file);
+  //     let base64 = await this.toBase64(file);
 
-      base64 = base64.split('base64,')[1];
+  //     base64 = base64.split('base64,')[1];
 
-      this.setState({
-        imageFile: base64,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //     this.setState({
+  //       imageFile: base64,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   render() {
     return (
@@ -182,7 +193,12 @@ class EditDestination extends Component {
         <div className={this.state.success === null ? '' : 'none'}>
           <Spinner />
         </div>
-        <form onSubmit={(event) => this.handleSubmit(event)} className={this.state.success === null ? 'none' : ''}>
+        <div className={this.state.success === false ? '' : 'none'}>
+          <div className='error-fetch'>
+            <p className='text-secondary fs-5'>Error while sending request to server</p>
+          </div>
+        </div>
+        <form onSubmit={(event) => this.handleSubmit(event)} className={this.state.success ? '' : 'none'}>
           <div className='mb-3'>
             <label className='form-label'>Destination Name</label>
             <input
@@ -273,7 +289,7 @@ class EditDestination extends Component {
           </div>
           <div className='button-area'>
             <button className='add-destination-button'>
-              <div className='text-primary'>Submit</div>
+              <div className='text-primary'>{this.state.isLoading ? <Spinner /> : 'Submit'}</div>
             </button>
           </div>
           {this.state.success === false ? <Navigate to={`/404`} /> : <div></div>}

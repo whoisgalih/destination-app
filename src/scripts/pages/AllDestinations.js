@@ -4,6 +4,7 @@ import Masonry from 'react-masonry-css';
 import { Link } from 'react-router-dom';
 
 import '../../styles/pages/AllDestinations.css';
+import '../../styles/components/ErrorFetch.css';
 import DestinationItem from '../components/DestinationItem';
 import Spinner from '../components/Spinner';
 
@@ -18,68 +19,28 @@ class AllDestinations extends Component {
       width: 0,
       ready: false,
     };
-
-    this.getData = this.getData.bind(this);
   }
 
   async deleteDestination(id) {
-    try {
-      let response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${id}`, {
-        method: 'DELETE',
-      });
+    let response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations/${id}`, {
+      method: 'DELETE',
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-    } catch (error) {
-      console.log(error);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
     }
   }
 
   async getData() {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE}/destinations`);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-
-      const json = await response.json();
-
-      return json.data;
-    } catch (error) {
-      return [];
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
     }
-  }
 
-  destinationsJSX() {
-    let jsx = this.state.destinations.map((destination) =>
-      // prettier-ignore
-      <DestinationItem 
-        key={destination.id}
-        id={destination.id} 
-        name={destination.name} 
-        description={destination.description} 
-        image={destination.image}
-        deleteCallback={async (id) => {
-          try {
-            await this.deleteDestination(id);
-            await this.getData()
-          } catch (error) {
-            console.log(error)
-          }
-        }}
-      />
-    );
+    const json = await response.json();
 
-    jsx.splice(0, 0, <div ref={this.sizer} className='white-space-1' key='ws1'></div>);
-    jsx.splice(2, 0, <div className='white-space-2' key='ws2'></div>);
-
-    this.setState({
-      ready: jsx.length === 2,
-    });
-
-    return jsx;
+    return json.data;
   }
 
   updateDimension() {
@@ -89,20 +50,25 @@ class AllDestinations extends Component {
   }
 
   async componentDidMount() {
-    const destinations = await this.getData();
-
-    this.setState(
-      {
-        destinations,
-        success: true,
-      },
-      () => {
-        this.updateDimension();
-        window.addEventListener('resize', () => {
+    try {
+      const destinations = await this.getData();
+      this.setState(
+        {
+          destinations,
+          success: true,
+        },
+        () => {
           this.updateDimension();
-        });
-      }
-    );
+          window.addEventListener('resize', () => {
+            this.updateDimension();
+          });
+        }
+      );
+    } catch (error) {
+      this.setState({
+        success: false,
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -146,6 +112,10 @@ class AllDestinations extends Component {
         </PageTitle>
         {this.state.success === null ? (
           <Spinner />
+        ) : this.state.success === false ? (
+          <div className='error-fetch'>
+            <p className='text-secondary fs-5'>Error while sending request to server</p>
+          </div>
         ) : (
           <div>
             <Masonry
@@ -174,7 +144,9 @@ class AllDestinations extends Component {
                         destinations,
                       });
                     } catch (error) {
-                      console.log(error);
+                      this.setState({
+                        success: false,
+                      });
                     }
                   }}
                 />
